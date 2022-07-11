@@ -1,0 +1,84 @@
+#!/bin/sh
+
+# archupdater script
+# author: Saqib Mir
+# this script updates arch linux mirrorlist, upgrades system, removes
+# orphan packages if the last update was done more than 6 days ago
+
+#variables
+lastupdate=$((($(date +%s) - $(date -d $(sed -n '/upgrade$/x;${x;s/.\([0-9-]*\).*/\1/p}' /var/log/pacman.log) +%s)) / 86400))
+mirrorlist=/etc/pacman.d/mirrorlist
+backup=/etc/pacman.d/mirrorlist.bak
+
+#functions
+updatemirrorlist() {
+  echo "updating mirrorlist"
+  if [  -f /usr/bin/reflector ]; then
+    echo "reflector is installed"
+  els
+    sudo pacman -Sy reflector --noconfirm --needed
+    if [ -f /usr/bin/reflector ]; then
+      echo "reflector is successfully installed"
+    else
+      echo "could not install reflector"
+    fi
+  fi
+
+  echo "creating backup mirrorlist"
+  if [ -f $backup ]; then
+    sudo rm $backup
+  fi
+
+  sudo cp $mirrorlist $backup
+
+  if [ -f $backup ]; then
+    echo "mirrorlist backed up to $backup"
+  else
+    echo "could not backup current mirrorlist to $backup"
+  fi 
+
+  echo "Optimizing mirrorlist for maximum speed"
+  sudo reflector -l 5 --verbose --sort rate --save /etc/pacman.d/mirrorlist
+  sudo pacman -Syy
+  echo "mirrorlist updated and packages list refreshed"
+}
+
+updatesystem() {
+  echo "updating system"
+  echo "updating pacman packages"
+  sudo pacman -Syu --noconfirm --needed &&
+  yay -Sua
+  echo "system updated successfullly"
+
+}
+
+removeorphans() {
+  echo "remove orphan packages"
+  sudo pacman -Rns --noconfirm --color=auto $(pacman -Qtdq)
+  echo
+}
+
+#actual script
+clear
+echo "Welcome to archupdater"
+echo "This script requires sudo privilages and a working internet connetcion."
+sudo -v
+printf 'Last update was %d days ago\n' $lastupdate
+if [[ $lastupdate > 6 ]] ; then
+  echo "A full system update is recommended"
+  read -p "do you wish to continue with updating system: " answ
+  if [[ $answ = "y" ]]; then
+    read -p  "do you want to update mirrorlist: " ans
+    if [[ $ans = "y " ]]; then
+      updatemirrorlist
+    fi
+    updatesystem
+    removeorphans
+  else
+    echo "aborting"
+  fi
+
+else
+  echo "no need to update"
+fi
+
