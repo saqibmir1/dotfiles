@@ -1,0 +1,41 @@
+#!/bin/sh
+
+#aliases
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	bc="bc -ql" \
+	mkd="mkdir -pv"
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi" \
+	ip="ip -color=auto"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	c="clear" \
+	r="ranger" \
+	yt="ytfzf" \
+	vim="nvim" \
+	p="pacman"
+
+#some long ass aliases
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias mc='java -jar ~/Documents/Games/minecraft.jar'
+
+#aliases for cd'ing
+alias \
+	pp="cd ~/Pictures" \
+	cf="cd ~/.config" \
+	D="cd ~/Downloads" \
+	b="cd ~/.local/bin" \
+	h="cd ~"
+
+
