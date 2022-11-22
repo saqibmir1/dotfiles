@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mac_addr="5A:D5:F7:9B:61:5A"
+bluetoothctl power on
+bluetoothctl connect $mac_addr &&
+notify-send "Bluetooth connected"
