@@ -67,4 +67,3 @@ while getopts ":ashd" opt; do
 
 done
 
-echo "Please use a flag -a, -s, -d, -h"
