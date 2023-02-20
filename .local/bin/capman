@@ -12,7 +12,7 @@ function notif_failed {
 }
 
 
-action=$(echo -e "Install Program\nRemove Program\nRemove Orphans\nUpdate System (pacman only)\nUpdate System (pacman + yay)" | fzf -i)
+action=$(echo -e "Install Program\nRemove Program\nRemove Orphans\nUpdate System (pacman only)\nUpdate System (pacman + yay)" | fzf -i --height 10)
 
 case $action in
   "Install Program")
