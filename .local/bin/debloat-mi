@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Welome to debloat-mi script"
 echo "This script will remove all xiaomi bloat from mi devices"\

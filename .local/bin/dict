@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #my personal dictionary
 #file check
 dictionary_file="$HOME/.local/share/dict/words.txt"

@@ -1,6 +1,4 @@
-#!/bin/sh
-
-# a script to bulk rename files.
+#!/bin/bash
 
 # Check if directory name is provided
 if [ -z "$1" ]
