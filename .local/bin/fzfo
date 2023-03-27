@@ -1,3 +1,0 @@
-#!/bin/bash
-#for opening files using fzf
-du -a  ~/Git/* ~/Downloads/* ~/.local/bin/* ~/.config/* ~/Code/* | awk '{print $2}' | fzf | xargs -r nvim
