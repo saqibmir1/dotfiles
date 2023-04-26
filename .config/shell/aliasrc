@@ -44,3 +44,5 @@ alias \
 	xi="sudo xbps-install" \
 	xr="sudo xbps-remove -R" \
 	xq="xbps-query" \
+
+	ax='axel -a -n 8'

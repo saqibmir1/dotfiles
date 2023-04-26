@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Shell script to generate qr code for copied links in the clipboard
+# Dependencies: qrlencode, xclip, sxiv
+
+qrencode -t PNG  -s 8 -o /tmp/tmp.png $(xclip -o)
+sxiv /tmp/tmp.png
