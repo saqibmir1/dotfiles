@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Define variables
+REPO_DIR="$HOME/saqibmir.me"
+WEBSITE_DIR="/var/www/mywebsite"
+
+# Change to the repository directory
+cd "$REPO_DIR" || { echo "Error changing to repository directory"; exit 1; }
+
+# Git pull to get the latest changes
+git pull origin main || { echo "Error pulling latest changes"; exit 1; }
+
+# Remove the contents of the website directory
+sudo rm -rf "$WEBSITE_DIR"/*
+
+# Copy "public" contents to the site directory
+sudo cp -ru public/* "$WEBSITE_DIR" || { echo "Error copying files"; exit 1; }
+
+# Restart Nginx
+sudo systemctl restart nginx || { echo "Error restarting nginx"; exit 1; }
+
+echo "Website updated successfully"
+

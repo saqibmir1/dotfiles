@@ -5,7 +5,8 @@ export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 
 #default programs
 export EDITOR="nvim"
-export BROWSER="librewolf"
+export VISUAL="nvim"
+export BROWSER="firefox"
 
 #runs mouse script to adjust scroll wheel speed
 #if pacman -Qs imwheel >/dev/null 2>&1; then
